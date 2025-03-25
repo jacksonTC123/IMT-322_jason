@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DELAY 1000
+#define DELAY 200
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -82,7 +82,7 @@ static void MX_USB_OTG_FS_PCD_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void print_number(int num);
 /* USER CODE END 0 */
 
 /**
@@ -118,26 +118,84 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
+  int contador = -2;
+  int button_pressed = 0;
+  int last_contador = -1;
 
   /* USER CODE END 2 */
+
+
+  uint8_t B1[]=" Botón presionado 1 veces \n\r";
+  uint8_t B2[]=" Botón presionado 2 veces \n\r";
+  uint8_t B3[]=" Botón presionado 3 veces \n\r";
+  uint8_t B4[]=" Botón presionado 4 veces \n\r";
+  uint8_t B5[]=" Botón presionado 5 veces \n\r";
+  uint8_t B6[]=" Botón presionado 6 veces \n\r";
+  uint8_t L1[]=" LED1 encendido \n\r";
+  uint8_t L2[]=" LED2 encendido \n\r";
+  uint8_t L3[]=" LED3 encendido \n\r";
+  uint8_t L1o[]=" LED1 apagado \n\r";
+  uint8_t L2o[]=" LED2 apagado \n\r";
+  uint8_t L3o[]=" LED3 apagado \n\r";
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_SET);
-	  HAL_Delay(DELAY);
-	  HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
-	  HAL_Delay(DELAY);
-	  HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);
-	  HAL_Delay(DELAY);
-	  HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
-	  HAL_Delay(DELAY);
-	  HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
-	  HAL_Delay(DELAY);
-	  HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_RESET);
-	  HAL_Delay(DELAY);
+	   if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
+	        if (!button_pressed) {
+	            contador++;
+	            HAL_Delay(DELAY);
+	            if (contador > 5) {
+	                contador = 0;
+	            }
+	            button_pressed = 1;
+	        }
+	    } else {
+	        button_pressed = 0;
+	    }
 
+	    if (contador != last_contador) {
+	        last_contador = contador; // Act
+	        switch (contador) {
+	            case 0:
+	                HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_SET);
+	                HAL_UART_Transmit(&huart3, B1, strlen(B1), HAL_MAX_DELAY);
+	                print_number(contador);
+	                HAL_UART_Transmit(&huart3, L1, strlen(L1), HAL_MAX_DELAY);
+	                break;
+	            case 1:
+	                HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
+	                HAL_UART_Transmit(&huart3, B2, strlen(B2), HAL_MAX_DELAY);
+	                HAL_UART_Transmit(&huart3, L2, strlen(L2), HAL_MAX_DELAY);
+	                break;
+	            case 2:
+	                HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);
+	                HAL_UART_Transmit(&huart3, B3, strlen(B3), HAL_MAX_DELAY);
+	                HAL_UART_Transmit(&huart3, L3, strlen(L3), HAL_MAX_DELAY);
+	                break;
+	            case 3:
+	                HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
+	                HAL_UART_Transmit(&huart3, B4, strlen(B4), HAL_MAX_DELAY);
+	                HAL_UART_Transmit(&huart3, L3o, strlen(L3o), HAL_MAX_DELAY);
+	                break;
+	            case 4:
+	                HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
+	                HAL_UART_Transmit(&huart3, B5, strlen(B5), HAL_MAX_DELAY);
+	                HAL_UART_Transmit(&huart3, L2o, strlen(L2o), HAL_MAX_DELAY);
+	                break;
+	            case 5:
+	                HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_RESET);
+	                HAL_UART_Transmit(&huart3, B6, strlen(B6), HAL_MAX_DELAY);
+	                HAL_UART_Transmit(&huart3, L1o, strlen(L1o), HAL_MAX_DELAY);
+	                break;
+	        }
+
+
+	  }
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
@@ -372,7 +430,24 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
+void print_number(int num){
+	 char buffer[6];
+	 int index = 0;
 
+	 do{
+		 buffer[index++] = (num % 10)+ '0';
+	 }while (num > 0);
+
+	 for(int i=0, j = index - 1; i < j; i++, j--){
+		 char temp = buffer[i];
+		 buffer[i] = buffer[j];
+		 char buffer[6];
+	 }
+	 buffer[index] = '\0';
+	 HAL_UART_Transmit(&huart3,(uint8_t*)buffer, index, HAL_MAX_DELAY);
+	 HAL_UART_Transmit(&huart3,(uint8_t*)"\r", index, HAL_MAX_DELAY);
+
+}
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
