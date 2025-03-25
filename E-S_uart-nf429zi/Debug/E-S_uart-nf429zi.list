@@ -393,153 +393,152 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
  8000506:	f000 fa71 	bl	80009ec <MX_USB_OTG_FS_PCD_Init>
   /* USER CODE BEGIN 2 */
-  int contador = -2;
- 800050a:	f06f 0301 	mvn.w	r3, #1
+  int contador = -1;
+ 800050a:	f04f 33ff 	mov.w	r3, #4294967295
  800050e:	f8c7 30ac 	str.w	r3, [r7, #172]	@ 0xac
-  int button_pressed = 0;
- 8000512:	2300      	movs	r3, #0
- 8000514:	f8c7 30a8 	str.w	r3, [r7, #168]	@ 0xa8
+  int button_pressed = -1;
+ 8000512:	f04f 33ff 	mov.w	r3, #4294967295
+ 8000516:	f8c7 30a8 	str.w	r3, [r7, #168]	@ 0xa8
   int last_contador = -1;
- 8000518:	f04f 33ff 	mov.w	r3, #4294967295
- 800051c:	f8c7 30a4 	str.w	r3, [r7, #164]	@ 0xa4
+ 800051a:	f04f 33ff 	mov.w	r3, #4294967295
+ 800051e:	f8c7 30a4 	str.w	r3, [r7, #164]	@ 0xa4
 
   uint8_t mensaje[]=" Botón presionado en numero de posicion: ";
- 8000520:	4bb7      	ldr	r3, [pc, #732]	@ (8000800 <main+0x314>)
- 8000522:	f107 0478 	add.w	r4, r7, #120	@ 0x78
- 8000526:	461d      	mov	r5, r3
- 8000528:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 800052a:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 800052c:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 800052e:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 8000530:	e895 0007 	ldmia.w	r5, {r0, r1, r2}
- 8000534:	c403      	stmia	r4!, {r0, r1}
- 8000536:	8022      	strh	r2, [r4, #0]
- 8000538:	3402      	adds	r4, #2
- 800053a:	0c13      	lsrs	r3, r2, #16
- 800053c:	7023      	strb	r3, [r4, #0]
+ 8000522:	4bb7      	ldr	r3, [pc, #732]	@ (8000800 <main+0x314>)
+ 8000524:	f107 0478 	add.w	r4, r7, #120	@ 0x78
+ 8000528:	461d      	mov	r5, r3
+ 800052a:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 800052c:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 800052e:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 8000530:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 8000532:	e895 0007 	ldmia.w	r5, {r0, r1, r2}
+ 8000536:	c403      	stmia	r4!, {r0, r1}
+ 8000538:	8022      	strh	r2, [r4, #0]
+ 800053a:	3402      	adds	r4, #2
+ 800053c:	0c13      	lsrs	r3, r2, #16
+ 800053e:	7023      	strb	r3, [r4, #0]
   uint8_t led1_on[]=" LED1 encendido \n\r";
- 800053e:	4bb1      	ldr	r3, [pc, #708]	@ (8000804 <main+0x318>)
- 8000540:	f107 0464 	add.w	r4, r7, #100	@ 0x64
- 8000544:	461d      	mov	r5, r3
- 8000546:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 8000548:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 800054a:	682b      	ldr	r3, [r5, #0]
- 800054c:	461a      	mov	r2, r3
- 800054e:	8022      	strh	r2, [r4, #0]
- 8000550:	3402      	adds	r4, #2
- 8000552:	0c1b      	lsrs	r3, r3, #16
- 8000554:	7023      	strb	r3, [r4, #0]
+ 8000540:	4bb0      	ldr	r3, [pc, #704]	@ (8000804 <main+0x318>)
+ 8000542:	f107 0464 	add.w	r4, r7, #100	@ 0x64
+ 8000546:	461d      	mov	r5, r3
+ 8000548:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 800054a:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 800054c:	682b      	ldr	r3, [r5, #0]
+ 800054e:	461a      	mov	r2, r3
+ 8000550:	8022      	strh	r2, [r4, #0]
+ 8000552:	3402      	adds	r4, #2
+ 8000554:	0c1b      	lsrs	r3, r3, #16
+ 8000556:	7023      	strb	r3, [r4, #0]
   uint8_t led2_on[]=" LED2 encendido \n\r";
- 8000556:	4bac      	ldr	r3, [pc, #688]	@ (8000808 <main+0x31c>)
- 8000558:	f107 0450 	add.w	r4, r7, #80	@ 0x50
- 800055c:	461d      	mov	r5, r3
- 800055e:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 8000560:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 8000562:	682b      	ldr	r3, [r5, #0]
- 8000564:	461a      	mov	r2, r3
- 8000566:	8022      	strh	r2, [r4, #0]
- 8000568:	3402      	adds	r4, #2
- 800056a:	0c1b      	lsrs	r3, r3, #16
- 800056c:	7023      	strb	r3, [r4, #0]
+ 8000558:	4bab      	ldr	r3, [pc, #684]	@ (8000808 <main+0x31c>)
+ 800055a:	f107 0450 	add.w	r4, r7, #80	@ 0x50
+ 800055e:	461d      	mov	r5, r3
+ 8000560:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 8000562:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 8000564:	682b      	ldr	r3, [r5, #0]
+ 8000566:	461a      	mov	r2, r3
+ 8000568:	8022      	strh	r2, [r4, #0]
+ 800056a:	3402      	adds	r4, #2
+ 800056c:	0c1b      	lsrs	r3, r3, #16
+ 800056e:	7023      	strb	r3, [r4, #0]
   uint8_t led3_on[]=" LED3 encendido \n\r";
- 800056e:	4ba7      	ldr	r3, [pc, #668]	@ (800080c <main+0x320>)
- 8000570:	f107 043c 	add.w	r4, r7, #60	@ 0x3c
- 8000574:	461d      	mov	r5, r3
- 8000576:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 8000578:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 800057a:	682b      	ldr	r3, [r5, #0]
- 800057c:	461a      	mov	r2, r3
- 800057e:	8022      	strh	r2, [r4, #0]
- 8000580:	3402      	adds	r4, #2
- 8000582:	0c1b      	lsrs	r3, r3, #16
- 8000584:	7023      	strb	r3, [r4, #0]
+ 8000570:	4ba6      	ldr	r3, [pc, #664]	@ (800080c <main+0x320>)
+ 8000572:	f107 043c 	add.w	r4, r7, #60	@ 0x3c
+ 8000576:	461d      	mov	r5, r3
+ 8000578:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 800057a:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 800057c:	682b      	ldr	r3, [r5, #0]
+ 800057e:	461a      	mov	r2, r3
+ 8000580:	8022      	strh	r2, [r4, #0]
+ 8000582:	3402      	adds	r4, #2
+ 8000584:	0c1b      	lsrs	r3, r3, #16
+ 8000586:	7023      	strb	r3, [r4, #0]
   uint8_t led1_off[]=" LED1 apagado \n\r";
- 8000586:	4ba2      	ldr	r3, [pc, #648]	@ (8000810 <main+0x324>)
- 8000588:	f107 0428 	add.w	r4, r7, #40	@ 0x28
- 800058c:	461d      	mov	r5, r3
- 800058e:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 8000590:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 8000592:	682b      	ldr	r3, [r5, #0]
- 8000594:	7023      	strb	r3, [r4, #0]
+ 8000588:	4ba1      	ldr	r3, [pc, #644]	@ (8000810 <main+0x324>)
+ 800058a:	f107 0428 	add.w	r4, r7, #40	@ 0x28
+ 800058e:	461d      	mov	r5, r3
+ 8000590:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 8000592:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 8000594:	682b      	ldr	r3, [r5, #0]
+ 8000596:	7023      	strb	r3, [r4, #0]
   uint8_t led2_off[]=" LED2 apagado \n\r";
- 8000596:	4b9f      	ldr	r3, [pc, #636]	@ (8000814 <main+0x328>)
- 8000598:	f107 0414 	add.w	r4, r7, #20
- 800059c:	461d      	mov	r5, r3
- 800059e:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 80005a0:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 80005a2:	682b      	ldr	r3, [r5, #0]
- 80005a4:	7023      	strb	r3, [r4, #0]
+ 8000598:	4b9e      	ldr	r3, [pc, #632]	@ (8000814 <main+0x328>)
+ 800059a:	f107 0414 	add.w	r4, r7, #20
+ 800059e:	461d      	mov	r5, r3
+ 80005a0:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 80005a2:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 80005a4:	682b      	ldr	r3, [r5, #0]
+ 80005a6:	7023      	strb	r3, [r4, #0]
   uint8_t led3_off[]=" LED3 apagado \n\r";
- 80005a6:	4b9c      	ldr	r3, [pc, #624]	@ (8000818 <main+0x32c>)
- 80005a8:	463c      	mov	r4, r7
- 80005aa:	461d      	mov	r5, r3
- 80005ac:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 80005ae:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 80005b0:	682b      	ldr	r3, [r5, #0]
- 80005b2:	7023      	strb	r3, [r4, #0]
+ 80005a8:	4b9b      	ldr	r3, [pc, #620]	@ (8000818 <main+0x32c>)
+ 80005aa:	463c      	mov	r4, r7
+ 80005ac:	461d      	mov	r5, r3
+ 80005ae:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 80005b0:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 80005b2:	682b      	ldr	r3, [r5, #0]
+ 80005b4:	7023      	strb	r3, [r4, #0]
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
 	  if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
- 80005b4:	f44f 5100 	mov.w	r1, #8192	@ 0x2000
- 80005b8:	4898      	ldr	r0, [pc, #608]	@ (800081c <main+0x330>)
- 80005ba:	f001 fbdf 	bl	8001d7c <HAL_GPIO_ReadPin>
- 80005be:	4603      	mov	r3, r0
- 80005c0:	2b00      	cmp	r3, #0
- 80005c2:	d116      	bne.n	80005f2 <main+0x106>
+ 80005b6:	f44f 5100 	mov.w	r1, #8192	@ 0x2000
+ 80005ba:	4898      	ldr	r0, [pc, #608]	@ (800081c <main+0x330>)
+ 80005bc:	f001 fbde 	bl	8001d7c <HAL_GPIO_ReadPin>
+ 80005c0:	4603      	mov	r3, r0
+ 80005c2:	2b00      	cmp	r3, #0
+ 80005c4:	d116      	bne.n	80005f4 <main+0x108>
 	  	if (!button_pressed) {
- 80005c4:	f8d7 30a8 	ldr.w	r3, [r7, #168]	@ 0xa8
- 80005c8:	2b00      	cmp	r3, #0
- 80005ca:	d115      	bne.n	80005f8 <main+0x10c>
+ 80005c6:	f8d7 30a8 	ldr.w	r3, [r7, #168]	@ 0xa8
+ 80005ca:	2b00      	cmp	r3, #0
+ 80005cc:	d115      	bne.n	80005fa <main+0x10e>
 	  		contador++;
- 80005cc:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
- 80005d0:	3301      	adds	r3, #1
- 80005d2:	f8c7 30ac 	str.w	r3, [r7, #172]	@ 0xac
+ 80005ce:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
+ 80005d2:	3301      	adds	r3, #1
+ 80005d4:	f8c7 30ac 	str.w	r3, [r7, #172]	@ 0xac
 	  		HAL_Delay(DELAY);
- 80005d6:	2064      	movs	r0, #100	@ 0x64
- 80005d8:	f000 fdca 	bl	8001170 <HAL_Delay>
+ 80005d8:	2064      	movs	r0, #100	@ 0x64
+ 80005da:	f000 fdc9 	bl	8001170 <HAL_Delay>
 	  		if (contador > 5) {
- 80005dc:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
- 80005e0:	2b05      	cmp	r3, #5
- 80005e2:	dd02      	ble.n	80005ea <main+0xfe>
+ 80005de:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
+ 80005e2:	2b05      	cmp	r3, #5
+ 80005e4:	dd02      	ble.n	80005ec <main+0x100>
 	  			contador = 0;
- 80005e4:	2300      	movs	r3, #0
- 80005e6:	f8c7 30ac 	str.w	r3, [r7, #172]	@ 0xac
+ 80005e6:	2300      	movs	r3, #0
+ 80005e8:	f8c7 30ac 	str.w	r3, [r7, #172]	@ 0xac
 	  		}
 	  		button_pressed = 1;
- 80005ea:	2301      	movs	r3, #1
- 80005ec:	f8c7 30a8 	str.w	r3, [r7, #168]	@ 0xa8
- 80005f0:	e002      	b.n	80005f8 <main+0x10c>
+ 80005ec:	2301      	movs	r3, #1
+ 80005ee:	f8c7 30a8 	str.w	r3, [r7, #168]	@ 0xa8
+ 80005f2:	e002      	b.n	80005fa <main+0x10e>
 	  	}
 	  } else {
 	  	button_pressed = 0;
- 80005f2:	2300      	movs	r3, #0
- 80005f4:	f8c7 30a8 	str.w	r3, [r7, #168]	@ 0xa8
+ 80005f4:	2300      	movs	r3, #0
+ 80005f6:	f8c7 30a8 	str.w	r3, [r7, #168]	@ 0xa8
 	  }
 	  // Solo ejecutar si hay un cambio en el contador
 	  if (contador != last_contador) {
- 80005f8:	f8d7 20ac 	ldr.w	r2, [r7, #172]	@ 0xac
- 80005fc:	f8d7 30a4 	ldr.w	r3, [r7, #164]	@ 0xa4
- 8000600:	429a      	cmp	r2, r3
- 8000602:	d0d7      	beq.n	80005b4 <main+0xc8>
+ 80005fa:	f8d7 20ac 	ldr.w	r2, [r7, #172]	@ 0xac
+ 80005fe:	f8d7 30a4 	ldr.w	r3, [r7, #164]	@ 0xa4
+ 8000602:	429a      	cmp	r2, r3
+ 8000604:	d0d7      	beq.n	80005b6 <main+0xca>
 		  last_contador = contador; // Actualiza el último estado impreso
- 8000604:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
- 8000608:	f8c7 30a4 	str.w	r3, [r7, #164]	@ 0xa4
+ 8000606:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
+ 800060a:	f8c7 30a4 	str.w	r3, [r7, #164]	@ 0xa4
 		  switch (contador) {
- 800060c:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
- 8000610:	2b05      	cmp	r3, #5
- 8000612:	d8cf      	bhi.n	80005b4 <main+0xc8>
- 8000614:	a201      	add	r2, pc, #4	@ (adr r2, 800061c <main+0x130>)
- 8000616:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 800061a:	bf00      	nop
+ 800060e:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
+ 8000612:	2b05      	cmp	r3, #5
+ 8000614:	d8cf      	bhi.n	80005b6 <main+0xca>
+ 8000616:	a201      	add	r2, pc, #4	@ (adr r2, 800061c <main+0x130>)
+ 8000618:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
  800061c:	08000635 	.word	0x08000635
  8000620:	08000681 	.word	0x08000681
  8000624:	080006cd 	.word	0x080006cd
  8000628:	0800071b 	.word	0x0800071b
- 800062c:	08000769 	.word	0x08000769
- 8000630:	080007b5 	.word	0x080007b5
+ 800062c:	08000765 	.word	0x08000765
+ 8000630:	080007b1 	.word	0x080007b1
 		  	  case 0:
 		  		  HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_SET);
  8000634:	2201      	movs	r2, #1
@@ -652,83 +651,83 @@ int main(void)
 	  			  print_number(contador);
  8000742:	f8d7 00ac 	ldr.w	r0, [r7, #172]	@ 0xac
  8000746:	f000 fa2d 	bl	8000ba4 <print_number>
-	  			  HAL_UART_Transmit(&huart3, led1_off, strlen(led1_off), HAL_MAX_DELAY);
- 800074a:	f107 0328 	add.w	r3, r7, #40	@ 0x28
- 800074e:	4618      	mov	r0, r3
- 8000750:	f7ff fd4c 	bl	80001ec <strlen>
- 8000754:	4603      	mov	r3, r0
- 8000756:	b29a      	uxth	r2, r3
- 8000758:	f107 0128 	add.w	r1, r7, #40	@ 0x28
- 800075c:	f04f 33ff 	mov.w	r3, #4294967295
- 8000760:	4830      	ldr	r0, [pc, #192]	@ (8000824 <main+0x338>)
- 8000762:	f002 f933 	bl	80029cc <HAL_UART_Transmit>
+	  			  HAL_UART_Transmit(&huart3, led3_off, strlen(led3_off), HAL_MAX_DELAY);
+ 800074a:	463b      	mov	r3, r7
+ 800074c:	4618      	mov	r0, r3
+ 800074e:	f7ff fd4d 	bl	80001ec <strlen>
+ 8000752:	4603      	mov	r3, r0
+ 8000754:	b29a      	uxth	r2, r3
+ 8000756:	4639      	mov	r1, r7
+ 8000758:	f04f 33ff 	mov.w	r3, #4294967295
+ 800075c:	4831      	ldr	r0, [pc, #196]	@ (8000824 <main+0x338>)
+ 800075e:	f002 f935 	bl	80029cc <HAL_UART_Transmit>
 	  			  break;
- 8000766:	e04a      	b.n	80007fe <main+0x312>
+ 8000762:	e04c      	b.n	80007fe <main+0x312>
 		  	  case 4:
 	  			  HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
- 8000768:	2200      	movs	r2, #0
- 800076a:	2180      	movs	r1, #128	@ 0x80
- 800076c:	482c      	ldr	r0, [pc, #176]	@ (8000820 <main+0x334>)
- 800076e:	f001 fb1d 	bl	8001dac <HAL_GPIO_WritePin>
+ 8000764:	2200      	movs	r2, #0
+ 8000766:	2180      	movs	r1, #128	@ 0x80
+ 8000768:	482d      	ldr	r0, [pc, #180]	@ (8000820 <main+0x334>)
+ 800076a:	f001 fb1f 	bl	8001dac <HAL_GPIO_WritePin>
 	  			  HAL_UART_Transmit(&huart3, mensaje, strlen(mensaje), HAL_MAX_DELAY);
- 8000772:	f107 0378 	add.w	r3, r7, #120	@ 0x78
- 8000776:	4618      	mov	r0, r3
- 8000778:	f7ff fd38 	bl	80001ec <strlen>
- 800077c:	4603      	mov	r3, r0
- 800077e:	b29a      	uxth	r2, r3
- 8000780:	f107 0178 	add.w	r1, r7, #120	@ 0x78
- 8000784:	f04f 33ff 	mov.w	r3, #4294967295
- 8000788:	4826      	ldr	r0, [pc, #152]	@ (8000824 <main+0x338>)
- 800078a:	f002 f91f 	bl	80029cc <HAL_UART_Transmit>
+ 800076e:	f107 0378 	add.w	r3, r7, #120	@ 0x78
+ 8000772:	4618      	mov	r0, r3
+ 8000774:	f7ff fd3a 	bl	80001ec <strlen>
+ 8000778:	4603      	mov	r3, r0
+ 800077a:	b29a      	uxth	r2, r3
+ 800077c:	f107 0178 	add.w	r1, r7, #120	@ 0x78
+ 8000780:	f04f 33ff 	mov.w	r3, #4294967295
+ 8000784:	4827      	ldr	r0, [pc, #156]	@ (8000824 <main+0x338>)
+ 8000786:	f002 f921 	bl	80029cc <HAL_UART_Transmit>
 	  			  print_number(contador);
- 800078e:	f8d7 00ac 	ldr.w	r0, [r7, #172]	@ 0xac
- 8000792:	f000 fa07 	bl	8000ba4 <print_number>
+ 800078a:	f8d7 00ac 	ldr.w	r0, [r7, #172]	@ 0xac
+ 800078e:	f000 fa09 	bl	8000ba4 <print_number>
 	  			  HAL_UART_Transmit(&huart3, led2_off, strlen(led2_off), HAL_MAX_DELAY);
- 8000796:	f107 0314 	add.w	r3, r7, #20
- 800079a:	4618      	mov	r0, r3
- 800079c:	f7ff fd26 	bl	80001ec <strlen>
- 80007a0:	4603      	mov	r3, r0
- 80007a2:	b29a      	uxth	r2, r3
- 80007a4:	f107 0114 	add.w	r1, r7, #20
- 80007a8:	f04f 33ff 	mov.w	r3, #4294967295
- 80007ac:	481d      	ldr	r0, [pc, #116]	@ (8000824 <main+0x338>)
- 80007ae:	f002 f90d 	bl	80029cc <HAL_UART_Transmit>
+ 8000792:	f107 0314 	add.w	r3, r7, #20
+ 8000796:	4618      	mov	r0, r3
+ 8000798:	f7ff fd28 	bl	80001ec <strlen>
+ 800079c:	4603      	mov	r3, r0
+ 800079e:	b29a      	uxth	r2, r3
+ 80007a0:	f107 0114 	add.w	r1, r7, #20
+ 80007a4:	f04f 33ff 	mov.w	r3, #4294967295
+ 80007a8:	481e      	ldr	r0, [pc, #120]	@ (8000824 <main+0x338>)
+ 80007aa:	f002 f90f 	bl	80029cc <HAL_UART_Transmit>
 	  			  break;
- 80007b2:	e024      	b.n	80007fe <main+0x312>
+ 80007ae:	e026      	b.n	80007fe <main+0x312>
 		  	  case 5:
 	  			  HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_RESET);
- 80007b4:	2200      	movs	r2, #0
- 80007b6:	2101      	movs	r1, #1
- 80007b8:	4819      	ldr	r0, [pc, #100]	@ (8000820 <main+0x334>)
- 80007ba:	f001 faf7 	bl	8001dac <HAL_GPIO_WritePin>
+ 80007b0:	2200      	movs	r2, #0
+ 80007b2:	2101      	movs	r1, #1
+ 80007b4:	481a      	ldr	r0, [pc, #104]	@ (8000820 <main+0x334>)
+ 80007b6:	f001 faf9 	bl	8001dac <HAL_GPIO_WritePin>
 	  			  HAL_UART_Transmit(&huart3, mensaje, strlen(mensaje), HAL_MAX_DELAY);
- 80007be:	f107 0378 	add.w	r3, r7, #120	@ 0x78
- 80007c2:	4618      	mov	r0, r3
- 80007c4:	f7ff fd12 	bl	80001ec <strlen>
- 80007c8:	4603      	mov	r3, r0
- 80007ca:	b29a      	uxth	r2, r3
- 80007cc:	f107 0178 	add.w	r1, r7, #120	@ 0x78
- 80007d0:	f04f 33ff 	mov.w	r3, #4294967295
- 80007d4:	4813      	ldr	r0, [pc, #76]	@ (8000824 <main+0x338>)
- 80007d6:	f002 f8f9 	bl	80029cc <HAL_UART_Transmit>
+ 80007ba:	f107 0378 	add.w	r3, r7, #120	@ 0x78
+ 80007be:	4618      	mov	r0, r3
+ 80007c0:	f7ff fd14 	bl	80001ec <strlen>
+ 80007c4:	4603      	mov	r3, r0
+ 80007c6:	b29a      	uxth	r2, r3
+ 80007c8:	f107 0178 	add.w	r1, r7, #120	@ 0x78
+ 80007cc:	f04f 33ff 	mov.w	r3, #4294967295
+ 80007d0:	4814      	ldr	r0, [pc, #80]	@ (8000824 <main+0x338>)
+ 80007d2:	f002 f8fb 	bl	80029cc <HAL_UART_Transmit>
 	  			  print_number(contador);
- 80007da:	f8d7 00ac 	ldr.w	r0, [r7, #172]	@ 0xac
- 80007de:	f000 f9e1 	bl	8000ba4 <print_number>
-	  			  HAL_UART_Transmit(&huart3, led3_off, strlen(led3_off), HAL_MAX_DELAY);
- 80007e2:	463b      	mov	r3, r7
- 80007e4:	4618      	mov	r0, r3
- 80007e6:	f7ff fd01 	bl	80001ec <strlen>
- 80007ea:	4603      	mov	r3, r0
- 80007ec:	b29a      	uxth	r2, r3
- 80007ee:	4639      	mov	r1, r7
+ 80007d6:	f8d7 00ac 	ldr.w	r0, [r7, #172]	@ 0xac
+ 80007da:	f000 f9e3 	bl	8000ba4 <print_number>
+	  			  HAL_UART_Transmit(&huart3, led1_off, strlen(led1_off), HAL_MAX_DELAY);
+ 80007de:	f107 0328 	add.w	r3, r7, #40	@ 0x28
+ 80007e2:	4618      	mov	r0, r3
+ 80007e4:	f7ff fd02 	bl	80001ec <strlen>
+ 80007e8:	4603      	mov	r3, r0
+ 80007ea:	b29a      	uxth	r2, r3
+ 80007ec:	f107 0128 	add.w	r1, r7, #40	@ 0x28
  80007f0:	f04f 33ff 	mov.w	r3, #4294967295
  80007f4:	480b      	ldr	r0, [pc, #44]	@ (8000824 <main+0x338>)
  80007f6:	f002 f8e9 	bl	80029cc <HAL_UART_Transmit>
 	  			  break;
  80007fa:	bf00      	nop
- 80007fc:	e6da      	b.n	80005b4 <main+0xc8>
+ 80007fc:	e6db      	b.n	80005b6 <main+0xca>
 	  if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
- 80007fe:	e6d9      	b.n	80005b4 <main+0xc8>
+ 80007fe:	e6da      	b.n	80005b6 <main+0xca>
  8000800:	080037b4 	.word	0x080037b4
  8000804:	080037e0 	.word	0x080037e0
  8000808:	080037f4 	.word	0x080037f4

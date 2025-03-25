@@ -104,8 +104,8 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
-  int contador = -2;
-  int button_pressed = 0;
+  int contador = -1;
+  int button_pressed = -1;
   int last_contador = -1;
 
   uint8_t mensaje[]=" Botón presionado en numero de posicion: ";
@@ -159,7 +159,7 @@ int main(void)
 	  			  HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
 	  			  HAL_UART_Transmit(&huart3, mensaje, strlen(mensaje), HAL_MAX_DELAY);
 	  			  print_number(contador);
-	  			  HAL_UART_Transmit(&huart3, led1_off, strlen(led1_off), HAL_MAX_DELAY);
+	  			  HAL_UART_Transmit(&huart3, led3_off, strlen(led3_off), HAL_MAX_DELAY);
 	  			  break;
 		  	  case 4:
 	  			  HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
@@ -171,7 +171,7 @@ int main(void)
 	  			  HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_RESET);
 	  			  HAL_UART_Transmit(&huart3, mensaje, strlen(mensaje), HAL_MAX_DELAY);
 	  			  print_number(contador);
-	  			  HAL_UART_Transmit(&huart3, led3_off, strlen(led3_off), HAL_MAX_DELAY);
+	  			  HAL_UART_Transmit(&huart3, led1_off, strlen(led1_off), HAL_MAX_DELAY);
 	  			  break;
 		  }
 	  	}
